@@ -10,6 +10,10 @@
     "@types/node": "^12.19.4",
     "@types/react": "^16.9.56",
     "@types/react-dom": "^16.9.9",
+    "beautiful-react-hooks": "^0.31.0",
+    "mobx": "^6.0.3",
+    "mobx-react": "^7.0.4",
+    "node-sass": "^4.14.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.0",
@@ -20,7 +24,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:prod": "",
+    "build:stage": "",
+    "lint": "npm run lint:css && npm run lint:js",
+    "lint:fix": "npm run lint:css:fix && npm run lint:js:fix",
+    "lint:css": "stylelint --quiet --cache \"src/**/*.{css,scss}\"",
+    "lint:css:fix": "stylelint --quiet --cache --fix --config .stylelintrc-extended \"src/**/*.{css,scss}\"",
+    "lint:js": "eslint --quiet --cache --ext .js,.jsx,.ts,.tsx src",
+    "lint:js:fix": "eslint --quiet --cache --fix --ext .js,.jsx,.ts,.tsx src"
   },
   "eslintConfig": {
     "extends": [
@@ -38,6 +50,43 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "description": "",
+  "author": "SmartHead (https://smarthead.ru)",
+  "license": "MIT",
+  "engines": {
+    "node": ">=10"
+  },
+  "devDependencies": {
+    "@smarthead/stylelint-config": "^1.6.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.5",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.5.1",
+    "prettier": "^2.1.2",
+    "stylelint": "^13.7.2",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-sh": "git+https://git@gitlab.smarthead.ru/frontend-public/stylelint-config-sh.git",
+    "stylelint-order": "^4.1.0",
+    "stylelint-prettier": "^1.1.2",
+    "stylelint-scss": "^3.18.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --quiet --cache --fix --ext .js,.jsx,.ts,.tsx",
+      "git add"
+    ],
+    "*.{css,scss}": [
+      "stylelint --quiet --cache --fix --config .stylelintrc-extended",
+      "git add"
     ]
   }
 }

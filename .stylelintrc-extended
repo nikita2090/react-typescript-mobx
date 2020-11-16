@@ -1,0 +1,20 @@
+{
+    "extends": [
+        "@smarthead/stylelint-config/extended",
+        "stylelint-prettier/recommended"
+    ],
+    "plugins": [
+        "stylelint-scss",
+        "stylelint-order",
+        "stylelint-prettier"
+    ],
+    "rules": {
+        "prettier/prettier": [
+            true,
+            {
+                "tabWidth": 4,
+                "singleQuote": false
+            }
+        ]
+    }
+}
