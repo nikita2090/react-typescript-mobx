@@ -5,6 +5,7 @@ export interface IUserNameStore {
     loading: boolean;
     getUserName: () => Promise<void>;
     setUserName: (a: string) => void;
+    setLoading: (v: boolean) => void;
 }
 
 export interface IRes {
@@ -34,7 +35,7 @@ class UserNameStoreClass implements IUserNameStore {
     loading = false;
 
     async getUserName(): Promise<void> {
-        this.loading = true;
+        this.setLoading(true);
 
         try {
             const res: Response = await fetch(
@@ -44,7 +45,7 @@ class UserNameStoreClass implements IUserNameStore {
             if (json.results) {
                 this.setUserName(json.results[0].name.first);
             }
-            this.loading = false;
+            this.setLoading(false);
         } catch (err) {
             alert(err);
         }
@@ -52,6 +53,10 @@ class UserNameStoreClass implements IUserNameStore {
 
     setUserName(name: string): void {
         this.userName = name;
+    }
+
+    setLoading(value: boolean): void {
+        this.loading = value;
     }
 }
 
