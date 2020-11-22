@@ -1,4 +1,6 @@
 import { makeAutoObservable } from 'mobx';
+import { errorsStore } from './errorsStore';
+import axios, { AxiosResponse } from 'axios';
 
 export interface IUserNameStore {
     userName: string;
@@ -36,18 +38,17 @@ class UserNameStoreClass implements IUserNameStore {
 
     async getUserName(): Promise<void> {
         this.setLoading(true);
-
         try {
-            const res: Response = await fetch(
+            const res: AxiosResponse = await axios(
                 'https://randomuser.me/api/?inc=name'
             );
-            const json = (await res.json()) as IResponce;
-            if (json.results) {
-                this.setUserName(json.results[0].name.first);
-            }
+            const data = res.data as IResponce;
+
+            this.setUserName(data.results[0].name.first);
             this.setLoading(false);
         } catch (err) {
-            alert(err);
+            console.log(err);
+            errorsStore.addError(err);
         }
     }
 
