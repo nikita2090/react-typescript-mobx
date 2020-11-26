@@ -1,16 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react';
 import { useDidMount } from 'beautiful-react-hooks';
-import { IMainStore, Store } from '../../store';
-import { IUserNameStore } from '../../store/userNameStore';
-import { IErrorsStore } from '../../store/errorsStore';
+import { useErrorsStore, useUserNameStore } from '../../store';
 
 import axios from 'axios';
 
 const FetchData: React.FC = () => {
-    const store = useContext<IMainStore>(Store);
-    const userNameStore: IUserNameStore = store.userNameStore;
-    const errorsStore: IErrorsStore = store.errorsStore;
+    const userNameStore = useUserNameStore();
+    const errorsStore = useErrorsStore();
 
     useDidMount(() => {
         void userNameStore.getUserName();

@@ -1,13 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react';
-import { IMainStore, Store } from '../../store';
-import { IErrorsStore } from '../../store/errorsStore';
+import { useErrorsStore } from '../../store';
 
 import styles from './styles.module.scss';
 
 const ErrorHandler: React.FC = () => {
-    const store = useContext<IMainStore>(Store);
-    const errorsStore: IErrorsStore = store.errorsStore;
+    const errorsStore = useErrorsStore();
 
     useEffect(() => {
         if (errorsStore.errors.length) {

@@ -1,12 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { observer } from 'mobx-react';
-import { Store, IMainStore } from '../../store';
+import { useToDoStore } from '../../store';
 
-import { ItoDoPoint, IToDoStore } from '../../store/toDoStore';
+import { ItoDoPoint } from '../../store/toDoStore';
 
 const ToDoList: React.FC = () => {
-    const store = useContext<IMainStore>(Store);
-    const toDoStore: IToDoStore = store.toDoStore;
+    const toDoStore = useToDoStore();
 
     const [inputText, setInputText] = useState('');
 
