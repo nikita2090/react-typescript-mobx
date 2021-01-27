@@ -17,8 +17,8 @@ export const mainStore = {
 
 export const Store = createContext(mainStore);
 
-export const useStore = () => useContext<IMainStore>(Store);
+export const useStore = (): IMainStore => useContext<IMainStore>(Store);
 
-export const useToDoStore = () => useStore().toDoStore;
-export const useUserNameStore = () => useStore().userNameStore;
-export const useErrorsStore = () => useStore().errorsStore;
+export const useToDoStore = (): IToDoStore => useStore().toDoStore;
+export const useUserNameStore = (): IUserNameStore => useStore().userNameStore;
+export const useErrorsStore = (): IErrorsStore => useStore().errorsStore;
