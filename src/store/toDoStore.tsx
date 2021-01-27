@@ -58,8 +58,8 @@ class ToDoStoreClass implements IToDoStore {
         });
     }
 
-    del(poinId: number) {
-        this.toDo = this.toDo.filter(({ id }) => id !== poinId);
+    del(pointId: number) {
+        this.toDo = this.toDo.filter(({ id }) => id !== pointId);
     }
 
     cleanAll() {

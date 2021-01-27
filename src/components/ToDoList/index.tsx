@@ -4,6 +4,8 @@ import { useToDoStore } from '../../store';
 
 import { ItoDoPoint } from '../../store/toDoStore';
 
+import styles from './styles.module.scss';
+
 const ToDoList: React.FC = () => {
     const toDoStore = useToDoStore();
 
@@ -25,26 +27,18 @@ const ToDoList: React.FC = () => {
             <h1>ToDoList</h1>
             <input value={inputText} onChange={handleInputChange} />
             <button onClick={handleAddClick}>ADD</button>
-            <ul>
-                {toDoStore.toDo.map(({ name, id, done }: ItoDoPoint) => {
-                    let cn = '';
-                    if (done) cn = 'done';
-
-                    return (
-                        <li key={id}>
-                            <i
-                                role="button"
-                                tabIndex={id}
-                                onClick={() => toDoStore.complete(id)}
-                                onKeyDown={() => toDoStore.complete(id)}
-                            >
-                                +
-                            </i>
-                            <span className={cn}>{name}</span>
-                            <button onClick={() => toDoStore.del(id)}>x</button>
-                        </li>
-                    );
-                })}
+            <ul className={styles.list}>
+                {toDoStore.toDo.map(({ name, id, done }: ItoDoPoint) => (
+                    <li key={id}>
+                        <button onClick={() => toDoStore.complete(id)}>
+                            +
+                        </button>
+                        <span className={done ? styles.done : undefined}>
+                            {name}
+                        </span>
+                        <button onClick={() => toDoStore.del(id)}>x</button>
+                    </li>
+                ))}
             </ul>
             <div>Done:{toDoStore.finishedTasks}</div>
             <button onClick={() => toDoStore.cleanAll()}>Clean</button>
