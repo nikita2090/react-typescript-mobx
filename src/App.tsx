@@ -6,7 +6,12 @@ import { configure } from 'mobx';
 import ErrorHandler from './components/ErrorHandler';
 // import configureMirage from './api/configureMirage';
 
-configure({ enforceActions: 'always' });
+configure({
+    enforceActions: 'always',
+    computedRequiresReaction: true,
+    reactionRequiresObservable: true,
+    observableRequiresReaction: true,
+});
 
 // configureMirage();
 

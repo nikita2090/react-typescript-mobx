@@ -3,11 +3,12 @@ import { observer } from 'mobx-react';
 import { useErrorsStore } from '../../store';
 
 import styles from './styles.module.scss';
+import { autorun } from 'mobx';
 
 const ErrorHandler: React.FC = () => {
     const errorsStore = useErrorsStore();
 
-    useEffect(() => {
+    autorun(() => {
         if (errorsStore.errors.length) {
             setTimeout(() => {
                 errorsStore.clean();
